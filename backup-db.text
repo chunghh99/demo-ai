@@ -1,0 +1,128 @@
+-- --------------------------------------------------------
+-- Host:                         db4free.net
+-- Server version:               8.0.31 - MySQL Community Server - GPL
+-- Server OS:                    Linux
+-- HeidiSQL Version:             11.3.0.6295
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Dumping database structure for nhandienkhuonmat
+DROP DATABASE IF EXISTS `nhandienkhuonmat`;
+CREATE DATABASE IF NOT EXISTS `nhandienkhuonmat` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `nhandienkhuonmat`;
+
+-- Dumping structure for table nhandienkhuonmat.attendance
+DROP TABLE IF EXISTS `attendance`;
+CREATE TABLE IF NOT EXISTS `attendance` (
+  `attendance_id` bigint NOT NULL AUTO_INCREMENT,
+  `student_id` bigint DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `location` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`attendance_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table nhandienkhuonmat.attendance: ~0 rows (approximately)
+DELETE FROM `attendance`;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+INSERT INTO `attendance` (`attendance_id`, `student_id`, `time`, `location`) VALUES
+	(1, 1, '2022-11-27 22:03:05', 'le thanh thi - hn -vn'),
+	(2, 1, '2022-11-27 22:06:14', 'ha noi vn');
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+
+-- Dumping structure for table nhandienkhuonmat.class
+DROP TABLE IF EXISTS `class`;
+CREATE TABLE IF NOT EXISTS `class` (
+  `class_id` bigint NOT NULL AUTO_INCREMENT,
+  `teacher_id` bigint NOT NULL DEFAULT '0',
+  `name` varchar(50) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table nhandienkhuonmat.class: ~0 rows (approximately)
+DELETE FROM `class`;
+/*!40000 ALTER TABLE `class` DISABLE KEYS */;
+INSERT INTO `class` (`class_id`, `teacher_id`, `name`) VALUES
+	(1, 1, 'lop 1');
+/*!40000 ALTER TABLE `class` ENABLE KEYS */;
+
+-- Dumping structure for table nhandienkhuonmat.student
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE IF NOT EXISTS `student` (
+  `student_id` bigint NOT NULL AUTO_INCREMENT,
+  `face_id` varchar(50) NOT NULL DEFAULT '0',
+  `address` varchar(500) NOT NULL DEFAULT '0',
+  `phone` varchar(50) NOT NULL DEFAULT '0',
+  `birthday` date NOT NULL,
+  `user_id` bigint NOT NULL,
+  `image` varchar(500) NOT NULL DEFAULT '',
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table nhandienkhuonmat.student: ~0 rows (approximately)
+DELETE FROM `student`;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` (`student_id`, `face_id`, `address`, `phone`, `birthday`, `user_id`, `image`) VALUES
+	(1, '123123', 'ha noiu', '0383605881', '1999-06-27', 1, 'imagePath');
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+
+-- Dumping structure for table nhandienkhuonmat.student_class
+DROP TABLE IF EXISTS `student_class`;
+CREATE TABLE IF NOT EXISTS `student_class` (
+  `student_class_ic` bigint NOT NULL AUTO_INCREMENT,
+  `student_id` bigint NOT NULL DEFAULT '0',
+  `class_id` bigint NOT NULL DEFAULT '0',
+  PRIMARY KEY (`student_class_ic`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table nhandienkhuonmat.student_class: ~0 rows (approximately)
+DELETE FROM `student_class`;
+/*!40000 ALTER TABLE `student_class` DISABLE KEYS */;
+INSERT INTO `student_class` (`student_class_ic`, `student_id`, `class_id`) VALUES
+	(1, 1, 1);
+/*!40000 ALTER TABLE `student_class` ENABLE KEYS */;
+
+-- Dumping structure for table nhandienkhuonmat.teacher
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE IF NOT EXISTS `teacher` (
+  `teacher_id` bigint NOT NULL AUTO_INCREMENT,
+  `phone` varchar(50) NOT NULL DEFAULT '0',
+  `full_name` varchar(50) NOT NULL DEFAULT '0',
+  `address` varchar(500) NOT NULL DEFAULT '0',
+  `birthday` date DEFAULT NULL,
+  PRIMARY KEY (`teacher_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table nhandienkhuonmat.teacher: ~0 rows (approximately)
+DELETE FROM `teacher`;
+/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
+INSERT INTO `teacher` (`teacher_id`, `phone`, `full_name`, `address`, `birthday`) VALUES
+	(1, '0333666999', 'huy chung teacher', 'ha noi', NULL);
+/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
+
+-- Dumping structure for table nhandienkhuonmat.user
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` bigint NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) NOT NULL DEFAULT '',
+  `password` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table nhandienkhuonmat.user: ~0 rows (approximately)
+DELETE FROM `user`;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`user_id`, `user_name`, `password`) VALUES
+	(1, 'chunghh', 'chunghh');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
