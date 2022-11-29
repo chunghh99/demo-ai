@@ -64,7 +64,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping("/forgot-password")
+    @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPass(@RequestBody User user){
         User userEntity = userService.getByUserName(user.getUsername());
         if(userEntity == null ){
