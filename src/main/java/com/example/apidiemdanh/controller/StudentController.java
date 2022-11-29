@@ -1,9 +1,9 @@
 package com.example.apidiemdanh.controller;
 
+import com.example.apidiemdanh.entity.ClassEntity;
 import com.example.apidiemdanh.entity.Student;
-import com.example.apidiemdanh.entity.Teacher;
 import com.example.apidiemdanh.entity.User;
-import com.example.apidiemdanh.service.TeacherService;
+import com.example.apidiemdanh.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,23 +12,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("teacher")
-public class TeacherController {
+@RequestMapping("student")
+public class StudentController {
 
     @Autowired
-    private TeacherService teacherService;
+    private StudentService studentService;
+
 
     @GetMapping("/all")
     public ResponseEntity<?> getAll(){
-        List<Teacher> teachers = teacherService.getAll();
-        return new ResponseEntity<>(teachers, HttpStatus.OK);
+        List<Student> listStudent = studentService.getAll();
+        return new ResponseEntity<List<Student>>(listStudent, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody Teacher teacher){
+    public ResponseEntity<?> create(@RequestBody Student student){
 
         try {
-            teacherService.create(teacher);
+            studentService.create(student);
         }catch (Exception exception){
             exception.printStackTrace();
             return new ResponseEntity<>("Thêm tạch!", HttpStatus.BAD_REQUEST);
@@ -36,11 +37,11 @@ public class TeacherController {
         return new ResponseEntity<>("Thành công", HttpStatus.OK);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Teacher teacher){
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@RequestBody Student student){
 
         try {
-            teacherService.update(teacher);
+            studentService.update(student);
         }catch (Exception exception){
             exception.printStackTrace();
             return new ResponseEntity<>("update tạch!", HttpStatus.BAD_REQUEST);
@@ -50,7 +51,10 @@ public class TeacherController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
-        Teacher teacher = teacherService.findById(id);
-        return new ResponseEntity<>(teacher, HttpStatus.OK);
+        Student student = studentService.getById(id);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
+
+
+
 }

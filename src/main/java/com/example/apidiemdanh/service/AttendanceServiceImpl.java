@@ -25,6 +25,13 @@ public class AttendanceServiceImpl implements AttendanceService{
     }
 
     @Override
+    public Attendance getById(Long id) {
+        return attendanceRepo.findById(id).get();
+    }
+
+
+
+    @Override
     public List<Attendance> getByTime(Date startTime, Date endTime) {
         return null;
     }

@@ -44,4 +44,14 @@ public class UserServiceImpl implements UserService {
             student.setUserId(user.getUserId());
             studentRepo.save(student);
     }
+
+    @Override
+    public void update(User user) {
+            userRepo.save(user);
+    }
+
+    @Override
+    public User getById(Long id) {
+        return userRepo.findById(id).get();
+    }
 }

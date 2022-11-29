@@ -1,5 +1,6 @@
 package com.example.apidiemdanh.controller;
 
+import com.example.apidiemdanh.entity.Attendance;
 import com.example.apidiemdanh.entity.Student;
 import com.example.apidiemdanh.entity.User;
 import com.example.apidiemdanh.service.StudentService;
@@ -56,6 +57,29 @@ public class UserController {
         }
         return new ResponseEntity<>("Đăng ký thành công", HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
+        User user = userService.getById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @PutMapping("/forgot-password")
+    public ResponseEntity<?> forgotPass(@RequestBody User user){
+        User userEntity = userService.getByUserName(user.getUsername());
+        if(userEntity == null ){
+            return new ResponseEntity<>("Tên đăng nhập khoong tồn tại!", HttpStatus.BAD_REQUEST);
+        }
+        try {
+            userEntity.setPassword("123456");
+            userService.update(userEntity);
+        }catch (Exception exception){
+            exception.printStackTrace();
+            return new ResponseEntity<>("quên pass thất bại!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("pass mới: 123456", HttpStatus.OK);
+    }
+
 
 
 

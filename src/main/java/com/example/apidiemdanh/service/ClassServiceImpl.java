@@ -27,6 +27,11 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
+    public void update(ClassEntity classEntity) {
+        classRepo.save(classEntity);
+    }
+
+    @Override
     public ClassEntity findById(Long classId) {
         Optional<ClassEntity> classEntity = classRepo.findById(classId);
         if(classEntity.isPresent()){

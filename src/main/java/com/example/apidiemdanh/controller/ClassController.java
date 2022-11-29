@@ -2,6 +2,7 @@ package com.example.apidiemdanh.controller;
 
 import com.example.apidiemdanh.entity.ClassEntity;
 import com.example.apidiemdanh.entity.Teacher;
+import com.example.apidiemdanh.entity.User;
 import com.example.apidiemdanh.service.ClassService;
 import com.example.apidiemdanh.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ClassController {
         return new ResponseEntity<>(teachers, HttpStatus.OK);
     }
 
-    @PutMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ClassEntity classEntity){
 
         try {
@@ -33,5 +34,23 @@ public class ClassController {
             return new ResponseEntity<>("Thêm tạch!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("Thành công", HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@RequestBody ClassEntity classEntity){
+
+        try {
+            classService.update(classEntity);
+        }catch (Exception exception){
+            exception.printStackTrace();
+            return new ResponseEntity<>("update tạch!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Thành công", HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
+        ClassEntity classEntity = classService.findById(id);
+        return new ResponseEntity<>(classEntity, HttpStatus.OK);
     }
 }

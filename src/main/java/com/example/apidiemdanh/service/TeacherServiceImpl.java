@@ -27,6 +27,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public void update(Teacher teacher) {
+        teacherRepo.save(teacher);
+    }
+
+    @Override
     public Teacher findById(Long teacherId) {
         Optional<Teacher> teacher = teacherRepo.findById(teacherId);
         if(teacher.isPresent()){
