@@ -32,11 +32,11 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody User user){
         User userEntity = userService.getByUserNameAndPassWord(user.getUsername(), user.getPassword());
         if(userEntity == null ){
-            return new ResponseEntity<>(userEntity, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Đăng nhập thất bại - không tìm thấy user!", HttpStatus.BAD_REQUEST);
         }
         Student student = studentService.findByUserId(userEntity.getUserId());
         if(student == null ){
-            return new ResponseEntity<>(student, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Đăng nhập thất bại - không tồn tại student ứng với user", HttpStatus.BAD_REQUEST);
         }
         student.setUserName(userEntity.getUsername());
 
