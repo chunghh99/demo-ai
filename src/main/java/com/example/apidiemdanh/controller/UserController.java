@@ -53,7 +53,7 @@ public class UserController {
             userService.create(user);
         }catch (Exception exception){
             exception.printStackTrace();
-            return new ResponseEntity<>("Đăng ký thất bại!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Đăng ký thất bại! ", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("Đăng ký thành công", HttpStatus.OK);
     }
